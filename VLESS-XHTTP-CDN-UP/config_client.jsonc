@@ -1,0 +1,61 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 10808,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "example.com",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "uuid",
+                                "encryption": "none"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/yourpath",
+                    "downloadSettings": {
+                        "address": "",
+                        "port": 8443,
+                        "network": "xhttp",
+                        "xhttpSettings": {
+                            "path": "/yourpath"
+                        },
+                        "security": "reality",
+                        "realitySettings": {
+                            "fingerprint": "chrome",
+                            "serverName": "example.net",
+                            "publicKey": "" // private key.
+                        }
+                    }
+                },
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "example.com",
+                    "alpn": [
+                        "h3"
+                    ]
+                }
+            }
+        }
+    ]
+}
